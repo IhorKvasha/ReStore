@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Product } from "../../app/layout/models/product";
 import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
