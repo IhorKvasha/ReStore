@@ -10,12 +10,13 @@ namespace server.Middleware
 {
     public class ExceptionMiddleware
     {
-        readonly RequestDelegate _next;
-        readonly ILogger<ExceptionMiddleware> _logger;
-        readonly IHostEnvironment _env;
-        public ExceptionMiddleware (RequestDelegate next, ILogger<ExceptionMiddleware> logger, IHostEnvironment env)
+        private readonly RequestDelegate _next;
+        private readonly ILogger<ExceptionMiddleware> _logger;
+        private readonly IHostEnvironment _env;
+        public ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddleware> logger, 
+            IHostEnvironment env)
         {
-            _next = next;
+            _env = env;
             _logger = logger;
             _next = next;
         }
@@ -26,7 +27,7 @@ namespace server.Middleware
             {
                 await _next(context);
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
                 context.Response.ContentType = "application/json";
