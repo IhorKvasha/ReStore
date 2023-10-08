@@ -11,8 +11,5 @@ namespace server.RequestHelpers
         public string searchTerm { get; set; }
         public string Types { get; set; }
         public string Brands { get; set; }  
-
-
-
     }
 }
