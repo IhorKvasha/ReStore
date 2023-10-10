@@ -9,7 +9,7 @@ import '@fontsource/roboto/700.css';
 import { RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './app/store/configureStore';
-import { router } from './app/router/Router';
+import { router } from './app/router/Routes';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
