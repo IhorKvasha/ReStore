@@ -84,7 +84,7 @@ namespace server.Controllers
             }
             await _userManager.AddToRoleAsync(user, "Member");
             
-            return StatusCode(201 );
+            return StatusCode(201);
         }
 
         [Authorize]
