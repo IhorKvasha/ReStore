@@ -15,7 +15,6 @@ export default function ProductCard({product}: Props)
   const {status} = useAppSelector(state => state.basket);
   const dispatch = useAppDispatch();
 
-  const newLocal = 'primary.light';
     return(
         <Card>
           <CardHeader

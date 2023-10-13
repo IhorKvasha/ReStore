@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice, isAnyOf } from "@reduxjs/toolkit";
+import { FieldValues } from "react-hook-form";
 import { toast } from "react-toastify";
 import agent from "../../app/api/agent";
+import { router } from "../../app/router/Routes";
 import { setBasket } from "../basket/basketSlice";
 import { User } from "../../app/layout/models/user";
-import { router } from "../../app/router/Routes";
-import { FieldValues } from "react-hook-form";
-
 
 interface AccountState {
     user: User | null
@@ -72,7 +71,6 @@ export const accountSlice = createSlice({
             router.navigate('/');
         })
         builder.addMatcher(isAnyOf(signInUser.fulfilled, fetchCurrentUser.fulfilled), (state, action) => {
-            console.log(action);
             state.user = action.payload;
         });
         builder.addMatcher(isAnyOf(signInUser.rejected), (state, action) => {
