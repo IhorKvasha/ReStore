@@ -8,7 +8,6 @@ namespace server.Entities
 {
     public class User : IdentityUser<int>
     {
-        public UserAddress Adress { get; set; }
-        public UserAddress Address { get; internal set; }
+        public UserAddress Address { get; set; }
     }
 }

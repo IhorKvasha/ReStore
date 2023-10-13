@@ -18,8 +18,8 @@ namespace server.Controllers
     [Authorize]
     public class OrdersController : BaseApiController
     {
-        private readonly StoreContex _context;
-        public OrdersController(StoreContex contex)
+        private readonly StoreContext _context;
+        public OrdersController(StoreContext contex)
         {
            _context = contex;
         }
@@ -28,7 +28,7 @@ namespace server.Controllers
         public async Task<ActionResult<List<Order>>> GetOrders()
         {
             return await _context.Orders
-                .Include(o=>o.OrderItem)
+                .Include(o=>o.OrderItems)
                 .Where(x => x.BuyerId == User.Identity.Name)
                 .ToListAsync();
         }
@@ -37,7 +37,7 @@ namespace server.Controllers
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
             return await _context.Orders
-                .Include(o=>o.OrderItem)
+                .Include(o=>o.OrderItems)
                 .Where(x=>x.BuyerId == User.Identity.Name && x.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -79,9 +79,9 @@ namespace server.Controllers
 
             var order = new Order
             {
-                OrderItem = items,
+                OrderItems = items,
                 BuyerId = User.Identity.Name,
-                ShippingAdress = orderDto.ShippingAddress,
+                ShippingAddress = orderDto.ShippingAddress,
                 Subtotal = subtotal,
                 DeliveryFee = deliveryFee
             };
@@ -95,8 +95,8 @@ namespace server.Controllers
                     user.Address = new UserAddress
                     {
                         FullName = orderDto.ShippingAddress.FullName,
-                        Adress1 = orderDto.ShippingAddress.Adress1,
-                        Adress2 = orderDto.ShippingAddress.Adress2,
+                        Address1 = orderDto.ShippingAddress.Address1,
+                        Address2 = orderDto.ShippingAddress.Address2,
                         City = orderDto.ShippingAddress.City,
                         State = orderDto.ShippingAddress.State,
                         Zip = orderDto.ShippingAddress.Zip,

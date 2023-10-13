@@ -44,7 +44,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddDbContext<StoreContex>(opt => 
+builder.Services.AddDbContext<StoreContext>(opt => 
 {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
@@ -53,7 +53,7 @@ builder.Services.AddIdentityCore<User>(opt =>{
     opt.User.RequireUniqueEmail = true;
 })
     .AddRoles<Role>()
-    .AddEntityFrameworkStores<StoreContex>();
+    .AddEntityFrameworkStores<StoreContext>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt=>
     {
@@ -96,7 +96,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 var scope = app.Services.CreateScope();
-var contex = scope.ServiceProvider.GetRequiredService<StoreContex>();
+var contex = scope.ServiceProvider.GetRequiredService<StoreContext>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 try

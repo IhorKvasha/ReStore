@@ -7,7 +7,7 @@ namespace API.Data
 {
     public static class DbInitializer
     {
-        public static async Task Initializer(StoreContex contex, UserManager<User> userManager)
+        public static async Task Initializer(StoreContext contex, UserManager<User> userManager)
         {
             if(!userManager.Users.Any())
             {

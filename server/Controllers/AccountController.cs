@@ -19,10 +19,10 @@ namespace server.Controllers
     {
             private readonly UserManager<User> _userManager;
             private readonly TokenService _tokenService;
-            private readonly StoreContex _context;
+            private readonly StoreContext _context;
 
 
-            public AccountController(UserManager<User> userManager, TokenService tokenService, StoreContex context)
+            public AccountController(UserManager<User> userManager, TokenService tokenService, StoreContext context)
             {
                 _userManager = userManager;
                 _tokenService = tokenService;

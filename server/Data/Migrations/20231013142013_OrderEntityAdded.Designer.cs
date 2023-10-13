@@ -3,16 +3,18 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace API.Data.Migrations
 {
-    [DbContext(typeof(StoreContex))]
-    partial class StoreContexModelSnapshot : ModelSnapshot
+    [DbContext(typeof(StoreContext))]
+    [Migration("20231013142013_OrderEntityAdded")]
+    partial class OrderEntityAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.22");
@@ -264,14 +266,14 @@ namespace API.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "ca6483e4-ad9b-492d-a418-e11e8a326935",
+                            ConcurrencyStamp = "8da0d092-17f2-4685-9ef8-7f8f068b78ee",
                             Name = "Member",
                             NormalizedName = "MEMBER"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "0bcb71b6-fc64-441c-be52-fa8422c491d3",
+                            ConcurrencyStamp = "0dc9c442-4098-460c-bf9d-5168b5299c84",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         });
@@ -284,9 +286,6 @@ namespace API.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AddressId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -335,8 +334,6 @@ namespace API.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -352,10 +349,10 @@ namespace API.Data.Migrations
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Adress1")
+                    b.Property<string>("Address1")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Adress2")
+                    b.Property<string>("Address2")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -450,15 +447,15 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("server.Entities.OrderAggregate.Order", b =>
                 {
-                    b.OwnsOne("server.Entities.OrderAggregate.ShippingAdress", "ShippingAdress", b1 =>
+                    b.OwnsOne("server.Entities.OrderAggregate.ShippingAddress", "ShippingAddress", b1 =>
                         {
                             b1.Property<int>("OrderId")
                                 .HasColumnType("INTEGER");
 
-                            b1.Property<string>("Adress1")
+                            b1.Property<string>("Address1")
                                 .HasColumnType("TEXT");
 
-                            b1.Property<string>("Adress2")
+                            b1.Property<string>("Address2")
                                 .HasColumnType("TEXT");
 
                             b1.Property<string>("City")
@@ -484,14 +481,14 @@ namespace API.Data.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.Navigation("ShippingAdress")
+                    b.Navigation("ShippingAddress")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("server.Entities.OrderAggregate.OrderItem", b =>
                 {
                     b.HasOne("server.Entities.OrderAggregate.Order", null)
-                        .WithMany("OrderItem")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId");
 
                     b.OwnsOne("server.Entities.OrderAggregate.ProductItemOrdered", "ItemOrdered", b1 =>
@@ -519,19 +516,10 @@ namespace API.Data.Migrations
                     b.Navigation("ItemOrdered");
                 });
 
-            modelBuilder.Entity("server.Entities.User", b =>
-                {
-                    b.HasOne("server.Entities.UserAddress", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
-                });
-
             modelBuilder.Entity("server.Entities.UserAddress", b =>
                 {
                     b.HasOne("server.Entities.User", null)
-                        .WithOne("Adress")
+                        .WithOne("Address")
                         .HasForeignKey("server.Entities.UserAddress", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -544,12 +532,12 @@ namespace API.Data.Migrations
 
             modelBuilder.Entity("server.Entities.OrderAggregate.Order", b =>
                 {
-                    b.Navigation("OrderItem");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("server.Entities.User", b =>
                 {
-                    b.Navigation("Adress");
+                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }

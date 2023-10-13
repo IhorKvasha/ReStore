@@ -13,8 +13,8 @@ namespace server.Controllers
 {
     public class BasketController : BaseApiController
     {
-        private readonly StoreContex _context;
-        public BasketController(StoreContex context)
+        private readonly StoreContext _context;
+        public BasketController(StoreContext context)
         {
             _context = context;
         }
