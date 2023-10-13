@@ -7,7 +7,7 @@ using server.Entities.OrderAggregate;
 
 namespace API.Data
 {
-    public class StoreContex : IdentityDbContext<User>
+    public class StoreContex : IdentityDbContext<User, Role, int    >
     {
         public StoreContex(DbContextOptions options) : base(options)
         { 
@@ -21,10 +21,17 @@ namespace API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<User>()
+                .HasOne(a=>a.Adress)
+                .WithOne()
+                .HasForeignKey<UserAddress>(a=>a.Id)
+                .OnDelete(DeleteBehavior.Cascade);
            
-            builder.Entity<IdentityRole>().HasData(
-                new IdentityRole{Name = "Member", NormalizedName = "MEMBER"},
-                new IdentityRole{Name = "Admin", NormalizedName = "ADMIN"}
+            builder.Entity<Role>()
+                .HasData(
+                    new Role{Id = 1, Name = "Member", NormalizedName = "MEMBER"},
+                    new Role{Id = 2, Name = "Admin", NormalizedName = "ADMIN"}
             );
         }
     }

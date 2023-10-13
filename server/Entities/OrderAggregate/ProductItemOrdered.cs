@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace server.Entities.OrderAggregate
 {
     [Owned]
-    public class ProductItemOrder
+    public class ProductItemOrdered
     {
         public int ProductId { get; set; }
         public string Name { get; set; }

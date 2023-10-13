@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using server.DTOs;
 using server.Entities;
 
@@ -27,5 +28,9 @@ namespace server.Extensions
                 }).ToList()
             };
         }
+        public static IQueryable<Basket> RetrieveBasketWithItems(this IQueryable<Basket> query, string builderId)
+    {
+        return query.Include(i=>i.Items).ThenInclude(p=>p.Product).Where(b=>b.BuyerId == builderId); 
+    }
     }
 }
