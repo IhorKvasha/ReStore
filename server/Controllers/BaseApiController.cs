@@ -11,6 +11,5 @@ namespace server.Controllers
     
     public class BaseApiController: ControllerBase
     {
-        
     }
 }
