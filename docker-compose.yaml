@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    image: image_name:1.4  # Замените на имя вашего образа .NET
+    ports:
+      - "8080:80"  # Порт, на котором будет работать ваше приложение
+    depends_on:
+      - postgres
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Server=postgres;Port=5432;User Id=igor;Password=1;Database=store
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: store
+      POSTGRES_USER: igor
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5432:5432"

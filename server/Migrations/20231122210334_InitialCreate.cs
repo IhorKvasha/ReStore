@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace API.Data.Migrations
+namespace API.Migrations
 {
-    public partial class PostgresInitial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -295,8 +295,8 @@ namespace API.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "3d6e0843-f8fb-48a4-bb54-469db4c59cae", "Member", "MEMBER" },
-                    { 2, "d4e32374-6e83-4e26-9e29-6f6c059f98a2", "Admin", "ADMIN" }
+                    { 1, "b92875b9-6404-47a6-8b58-0c193ed49055", "Member", "MEMBER" },
+                    { 2, "a793dcd0-a16d-44b8-af9f-9b2351797734", "Admin", "ADMIN" }
                 });
 
             migrationBuilder.CreateIndex(
